@@ -1,5 +1,6 @@
 extends Node3D
 
+
 var selected_ship_node = null
 
 func _ready():
@@ -23,6 +24,7 @@ func _on_confirm_button_pressed():
 	get_tree().change_scene_to_file("res://Game.tscn")
 
 
+
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		var camera = $Camera3D
@@ -32,9 +34,11 @@ func _input(event):
 		var params = PhysicsRayQueryParameters3D.create(from, to)
 		var result = space_state.intersect_ray(params)
 
+
 		if result:
 			var collider = result.collider
 			if collider.is_in_group("ships"):
+
 				if selected_ship_node:
 					# Optional: Reset scale or visual indicator of the previously selected ship
 					selected_ship_node.scale = Vector3(1, 1, 1)

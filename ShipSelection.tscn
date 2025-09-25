@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=10 format=3 uid="uid://b8kpmk2a3b4c"]
 
 [ext_resource type="Script" path="res://Rotator.gd" id="1_rotator"]
@@ -18,10 +19,12 @@ albedo_color = Color(1, 0, 0, 1)
 albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="Environment" id="Env_ShipSelect"]
+
 background_mode = 1
 background_color = Color(0.1, 0.1, 0.12, 1)
 
 [node name="ShipSelection" type="Node3D"]
+
 script = ExtResource("2_ship_select")
 
 [node name="GreenShip" type="StaticBody3D" parent="." groups=["ships"]]
@@ -64,6 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
 environment = SubResource("Env_ShipSelect")
 
 [node name="UI" type="Control" parent="."]
@@ -82,9 +86,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = 100.0
+
+offset_top = 182.5
 offset_right = 100.0
-offset_bottom = 170.0
+offset_bottom = 287.5
+
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -100,4 +106,5 @@ placeholder_text = "Player"
 
 [node name="ConfirmButton" type="Button" parent="UI/VBoxContainer"]
 layout_mode = 2
+
 text = "Confirm Selection"
