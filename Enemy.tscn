@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1d2d3d4d5d6"]
+
+[ext_resource type="Script" path="res://Enemy.gd" id="1_enemy_script"]
+
+[sub_resource type="BoxMesh" id="Mesh_Enemy_Box"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_Enemy_White"]
+albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="Collision_Enemy_Box"]
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
+script = ExtResource("1_enemy_script")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_Enemy_Box")
+material_override = SubResource("Mat_Enemy_White")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("Collision_Enemy_Box")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

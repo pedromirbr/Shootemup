@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1b2b3b4b5b6"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_player_script"]
+
+[sub_resource type="PyramidMesh" id="Mesh_Player_Pyramid"]
+
+[sub_resource type="ConvexPolygonShape3D" id="Collision_Player_Pyramid"]
+points = PackedVector3Array(1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 0, 1, 0)
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_player_script")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pivot"]
+mesh = SubResource("Mesh_Player_Pyramid")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("Collision_Player_Pyramid")

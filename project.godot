@@ -8,6 +8,10 @@
 
 config_version=5
 
+[autoload]
+
+PlayerData="*res://PlayerData.gd"
+
 [application]
 
 config/name="Shootemup"
