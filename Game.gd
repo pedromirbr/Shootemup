@@ -16,7 +16,7 @@ func _ready():
 	enemy_spawn_timer.start()
 
 
-func _process(delta):
+func _process(_delta):
 	# Update the score label
 	score_label.text = "Score: %s" % PlayerData.score
 
