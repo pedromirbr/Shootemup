@@ -14,7 +14,7 @@ func _on_confirm_button_pressed():
 		return
 
 	var player_name_input = $UI/VBoxContainer/LineEdit.text
-	if not player_name_input.empty():
+	if not player_name_input.is_empty():
 		PlayerData.player_name = player_name_input
 
 	PlayerData.selected_ship = selected_ship_node.name
