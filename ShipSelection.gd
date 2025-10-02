@@ -1,6 +1,5 @@
 extends Node3D
 
-
 var selected_ship_node = null
 
 func _ready():
@@ -15,14 +14,13 @@ func _on_confirm_button_pressed():
 		return
 
 	var player_name_input = $UI/VBoxContainer/LineEdit.text
-	if not player_name_input == null:
+	if not player_name_input.empty():
 		PlayerData.player_name = player_name_input
 
 	PlayerData.selected_ship = selected_ship_node.name
 
 	print("Player: %s, Ship: %s" % [PlayerData.player_name, PlayerData.selected_ship])
 	get_tree().change_scene_to_file("res://Game.tscn")
-
 
 
 func _input(event):
@@ -34,11 +32,9 @@ func _input(event):
 		var params = PhysicsRayQueryParameters3D.create(from, to)
 		var result = space_state.intersect_ray(params)
 
-
 		if result:
 			var collider = result.collider
 			if collider.is_in_group("ships"):
-
 				if selected_ship_node:
 					# Optional: Reset scale or visual indicator of the previously selected ship
 					selected_ship_node.scale = Vector3(1, 1, 1)

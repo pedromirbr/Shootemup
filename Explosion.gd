@@ -1,10 +1,6 @@
 extends GPUParticles3D
 
 func _ready():
-	# The particles are set to one-shot, so we just need to wait until they are finished
-	# before destroying the node.
-	set_process(true)
-
-func _process(delta):
-	if not emitting:
-		queue_free()
+	# Connect the 'finished' signal to the 'queue_free' method.
+	# This will automatically destroy the node once the particle emission is complete.
+	finished.connect(queue_free)
