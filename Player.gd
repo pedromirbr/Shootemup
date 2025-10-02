@@ -27,7 +27,7 @@ func _ready():
 	$Pivot/MeshInstance3D.set_surface_override_material(0, material)
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = Vector3(direction.x, direction.y, 0) * speed * speed_modifier
 	move_and_slide()
