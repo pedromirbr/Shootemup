@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Player.gd" id="1_player_script"]
 
-[sub_resource type="ConeMesh" id="Mesh_Player_Pyramid"]
+[sub_resource type="CylinderMesh" id="Mesh_Player_Pyramid"]
 top_radius = 0.0
 bottom_radius = 1.414
 height = 2.0
