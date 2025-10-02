@@ -19,12 +19,12 @@ albedo_color = Color(1, 1, 0, 1)
 emission_enabled = true
 emission = Color(1, 1, 0, 1)
 emission_energy_multiplier = 3.0
-shading_mode = 0 # Unshaded
+shading_mode = 0
 
 [sub_resource type="QuadMesh" id="Mesh_Explosion_Quad"]
-material = SubResource("Mat_Explosion")
 
 [node name="Explosion" type="GPUParticles3D"]
+material_override = SubResource("Mat_Explosion")
 emitting = true
 amount = 50
 lifetime = 0.4
