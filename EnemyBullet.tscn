@@ -1,23 +1,25 @@
 [gd_scene load_steps=5 format=3 uid="uid://e1e2e3e4e5e6"]
 
-[ext_resource type="Script" path="res://EnemyBullet.gd" id="1_enemy_bullet_script"]
+[ext_resource type="Script" uid="uid://dnc3gtfjfcif0" path="res://EnemyBullet.gd" id="1_enemy_bullet_script"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_EnemyBullet_Yellow"]
+albedo_color = Color(1, 1, 0, 1)
 
 [sub_resource type="SphereMesh" id="Mesh_EnemyBullet_Sphere"]
 radius = 0.1
 height = 0.2
 
-[sub_resource type="StandardMaterial3D" id="Mat_EnemyBullet_Yellow"]
-albedo_color = Color(1, 1, 0, 1)
-
 [sub_resource type="SphereShape3D" id="Collision_EnemyBullet_Sphere"]
 radius = 0.1
 
 [node name="EnemyBullet" type="Area3D" groups=["enemy_bullets"]]
+collision_layer = 2048
+collision_mask = 2048
 script = ExtResource("1_enemy_bullet_script")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("Mesh_EnemyBullet_Sphere")
 material_override = SubResource("Mat_EnemyBullet_Yellow")
+mesh = SubResource("Mesh_EnemyBullet_Sphere")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("Collision_EnemyBullet_Sphere")

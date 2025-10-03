@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1b2b3b4b5b6"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_player_script"]
+[ext_resource type="Script" uid="uid://bojkxauoj83cu" path="res://Player.gd" id="1_player_script"]
 
 [sub_resource type="CylinderMesh" id="Mesh_Player_Pyramid"]
 top_radius = 0.0
 bottom_radius = 1.414
-height = 2.0
 radial_segments = 4
 
 [sub_resource type="ConvexPolygonShape3D" id="Collision_Player_Pyramid"]
 points = PackedVector3Array(1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 0, 1, 0)
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2048
+collision_mask = 2048
 script = ExtResource("1_player_script")
 
 [node name="Pivot" type="Node3D" parent="."]
@@ -20,4 +21,5 @@ script = ExtResource("1_player_script")
 mesh = SubResource("Mesh_Player_Pyramid")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
 shape = SubResource("Collision_Player_Pyramid")

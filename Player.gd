@@ -29,7 +29,9 @@ func _ready():
 
 func _physics_process(delta):
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	velocity = Vector3(direction.x, direction.y, 0) * speed * speed_modifier
+	velocity = Vector3(direction.x, -direction.y, 0) * speed * speed_modifier
+	var target_roll = -direction.x * deg_to_rad(15)
+	rotation.y = lerp_angle(rotation.y, target_roll, delta * speed)
 	move_and_slide()
 
 	# Clamp player position to stay within screen bounds (approximate)
