@@ -10,7 +10,7 @@ var explosion_scene = preload("res://Explosion.tscn")
 func _ready():
 	max_health = health
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = Vector3(0, -1, 0) * speed
 	move_and_slide()
 
@@ -33,11 +33,10 @@ func die():
 
 
 func shoot():
-	var bullet = bullet_scene.instantiate()
-	# Add bullet to the main game scene, not as a child of the enemy
-	get_tree().root.add_child(bullet)
+	var bullet = BulletPool.get_enemy_bullet()
 	bullet.global_transform = self.global_transform
-	bullet.global_position.y -= 1.0 # Offset to shoot from the front
+	bullet.global_position.y -= 1.0
+	# Não precisa setar visible = true aqui, já é feito no pool
 
 
 func _on_screen_exited():

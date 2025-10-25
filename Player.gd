@@ -9,21 +9,27 @@ var health: int
 var damage: int
 var speed_modifier: float
 
+var is_invulnerable: bool = false
+var invulnerability_time: float = 0.5
+
 func _ready():
 	var stats = PlayerData.get_current_ship_stats()
 	health = stats["health"]
 	damage = stats["damage"]
 	speed_modifier = stats["speed_modifier"]
 
-	# Set the color based on the selected ship
+	# CORREÇÃO: Usar cores básicas por enquanto (depois criamos os materiais)
 	var ship_name = PlayerData.selected_ship
 	var material = StandardMaterial3D.new()
-	if ship_name == &"GreenShip":
-		material.albedo_color = Color.GREEN
-	elif ship_name == &"RedShip":
-		material.albedo_color = Color.RED
-	elif ship_name == &"BlueShip":
-		material.albedo_color = Color.BLUE
+	
+	match ship_name:
+		&"GreenShip":
+			material.albedo_color = Color.GREEN
+		&"RedShip":
+			material.albedo_color = Color.RED
+		&"BlueShip":
+			material.albedo_color = Color.BLUE
+	
 	$Pivot/MeshInstance3D.set_surface_override_material(0, material)
 
 
@@ -43,20 +49,40 @@ func _physics_process(delta):
 
 
 func shoot():
-	var bullet = bullet_scene.instantiate()
+	var bullet = BulletPool.get_player_bullet()
 	bullet.damage = self.damage
-	# Add bullet to the main game scene, not as a child of the player
-	get_tree().root.add_child(bullet)
 	bullet.global_transform = self.global_transform
-	bullet.global_position.y += 1.0 # Offset to shoot from the front
-
+	bullet.global_position.y += 1.0
+	# Não precisa setar visible = true aqui, já é feito no pool
 
 func take_damage(amount):
+	if is_invulnerable:
+		return
+		
 	var stats = PlayerData.get_current_ship_stats()
 	var final_damage = amount * (1.0 - stats["damage_reduction"])
 	health -= final_damage
+	
+	# FEEDBACK VISUAL: Piscar nave
+	start_flash_effect()
+	
 	print("Player took %s damage, health is now %s" % [final_damage, health])
 	if health <= 0:
 		print("Player has been destroyed!")
 		died.emit()
 		queue_free()
+
+func start_flash_effect():
+	is_invulnerable = true
+	var mesh = $Pivot/MeshInstance3D
+	
+	# Piscar a nave de forma simples
+	var tween = create_tween()
+	for i in range(4):  # 4 piscadas
+		tween.tween_callback(func(): mesh.visible = false).set_delay(0.1)
+		tween.tween_callback(func(): mesh.visible = true).set_delay(0.1)
+	
+	# Restaurar após invulnerabilidade
+	await get_tree().create_timer(invulnerability_time).timeout
+	is_invulnerable = false
+	mesh.visible = true
