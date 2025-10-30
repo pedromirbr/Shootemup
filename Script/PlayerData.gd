@@ -4,12 +4,12 @@ var player_name: String = "Player"
 var score: int = 0
 var selected_ship: StringName = &"RedShip"
 
-var camera_size: float = 30.0
+const camera_size: float = 50.0
 
-const GAME_DEPTH: float = -10.0
-const PLAYER_BOUNDS_X: Vector2 = Vector2(-30.0, 30.0)
-const PLAYER_BOUNDS_Y: Vector2 = Vector2(-40.0, 40.0)
-const ENEMY_SPAWN_Y: float = 20.0
+const GAME_DEPTH: float = 0
+const PLAYER_BOUNDS_X: Vector2 = Vector2(-15, 15)
+const PLAYER_BOUNDS_Y: Vector2 = Vector2(-20, 20)
+const ENEMY_SPAWN_Y: float = 20
 
 var ship_stats = {
 	&"GreenShip": {

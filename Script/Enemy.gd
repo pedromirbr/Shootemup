@@ -1,8 +1,9 @@
 extends CharacterBody3D
 
-@export var speed = 3.0
+@export var speed = 6.0
 @export var health = 10
 var max_health: int
+const ENEMY_DESPAWN: float = -20
 
 var bullet_scene = preload("res://Scene/EnemyBullet.tscn")
 var explosion_scene = preload("res://Scene/Explosion.tscn")
@@ -13,7 +14,7 @@ func _ready():
 
 func _physics_process(_delta):
 	velocity = Vector3(0, -1, 0) * speed
-	if position.y <= -7:
+	if position.y <= ENEMY_DESPAWN:
 		queue_free()
 	move_and_slide()
 

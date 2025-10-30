@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 signal died
 
-@export var speed = 8.0
+@export var speed = 12.0
 var bullet_scene = preload("res://Scene/PlayerBullet.tscn")
 
 var health: int

@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var speed = 8.0
+@export var speed = 16.0
 var damage = 5 # As requested, 5 points of damage
 
 func _physics_process(delta):
