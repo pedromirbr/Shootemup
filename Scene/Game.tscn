@@ -31,7 +31,6 @@ shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 projection = 1
-size = 18.0
 script = ExtResource("4_ivtx6")
 
 [node name="UI" type="Control" parent="."]

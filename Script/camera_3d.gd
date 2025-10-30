@@ -5,8 +5,9 @@ func _ready():
 	make_current()
 	
 	# Configurar posição e propriedades
-	position = Vector3(0, 0, PlayerData.camera_distance)
-	fov = 70
+	position = Vector3(0, 0, 50)
+	size = PlayerData.camera_size
+
 	
 	print("Câmera configurada: ", name)
 	print("Posição: ", position)
