@@ -2,11 +2,13 @@ extends Node3D
 
 @export var barrier_scene: PackedScene
 # ⭐ REMOVER variáveis locais, usar constantes globais
-@export var segment_length: float = 10.0
-@export var segments_ahead: int = 8
+@export var segment_length: float = 2.0
+@export var segments_ahead: int = 20
 
 var current_segment: int = 0
 var barriers: Array = []
+var largura: float =0.0
+var probability_of_one: float = 0
 
 func _ready():
 	generate_initial_segments()
@@ -24,13 +26,21 @@ func generate_initial_segments():
 
 func create_segment(y_position: float):
 	# ⭐ USAR CONSTANTES GLOBAIS para posições
+	
+	if largura/9 > randf():
+		largura=largura-1
+	else:
+		largura=largura+1	
+	
+	print(largura)
+	
 	var left_barrier = barrier_scene.instantiate()
-	left_barrier.position = Vector3(PlayerData.RIVER_BARRIER_LEFT_POS, y_position, PlayerData.GAME_DEPTH)
+	left_barrier.position = Vector3(PlayerData.RIVER_BARRIER_LEFT_POS+largura, y_position, PlayerData.GAME_DEPTH)
 	add_child(left_barrier)
 	barriers.append(left_barrier)
 	
 	var right_barrier = barrier_scene.instantiate()
-	right_barrier.position = Vector3(PlayerData.RIVER_BARRIER_RIGHT_POS, y_position, PlayerData.GAME_DEPTH)
+	right_barrier.position = Vector3(PlayerData.RIVER_BARRIER_RIGHT_POS-largura, y_position, PlayerData.GAME_DEPTH)
 	add_child(right_barrier)
 	barriers.append(right_barrier)
 
