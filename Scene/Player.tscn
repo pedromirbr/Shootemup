@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1b2b3b4b5b6"]
 
-[ext_resource type="Script" uid="uid://bojkxauoj83cu" path="res://Player.gd" id="1_player_script"]
+[ext_resource type="Script" uid="uid://bojkxauoj83cu" path="res://Script/Player.gd" id="1_player_script"]
 
 [sub_resource type="CylinderMesh" id="Mesh_Player_Pyramid"]
 top_radius = 0.0

@@ -3,7 +3,7 @@ extends CharacterBody3D
 signal died
 
 @export var speed = 8.0
-var bullet_scene = preload("res://PlayerBullet.tscn")
+var bullet_scene = preload("res://Scene/PlayerBullet.tscn")
 
 var health: int
 var damage: int
@@ -13,6 +13,7 @@ var is_invulnerable: bool = false
 var invulnerability_time: float = 0.5
 
 func _ready():
+	position.z = PlayerData.GAME_DEPTH
 	var stats = PlayerData.get_current_ship_stats()
 	health = stats["health"]
 	damage = stats["damage"]
@@ -40,11 +41,14 @@ func _physics_process(delta):
 	rotation.y = lerp_angle(rotation.y, target_roll, delta * speed)
 	move_and_slide()
 
-	# Clamp player position to stay within screen bounds (approximate)
-	position.x = clamp(position.x, -8.5, 8.5)
-	position.y = clamp(position.y, -4.5, 4.5)
+	# ATUALIZADO: Clamp para resolução 800x1024 (modo retrato)
+	position.x = clamp(position.x, PlayerData.PLAYER_BOUNDS_X.x, PlayerData.PLAYER_BOUNDS_X.y)
+	position.y = clamp(position.y, PlayerData.PLAYER_BOUNDS_Y.x, PlayerData.PLAYER_BOUNDS_Y.y)
+	position.z = PlayerData.GAME_DEPTH  # Manter profundidade
 
-	if Input.is_action_just_pressed("ui_accept"): # 'ui_accept' is usually Spacebar
+	print("Posição: ", position)
+
+	if Input.is_action_just_pressed("ui_accept"):
 		shoot()
 
 

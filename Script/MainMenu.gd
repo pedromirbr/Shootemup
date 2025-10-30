@@ -1,7 +1,7 @@
 extends Control
 
 func _on_start_button_pressed():
-	get_tree().change_scene_to_file("res://ShipSelection.tscn")
+	get_tree().change_scene_to_file("res://Scene/ShipSelection.tscn")
 
 
 func _on_quit_button_pressed():

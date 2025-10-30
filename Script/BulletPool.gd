@@ -7,8 +7,8 @@ var player_bullet_pool: Array = []
 var enemy_bullet_pool: Array = []
 var pool_size: int = 20
 
-var player_bullet_scene = preload("res://PlayerBullet.tscn")
-var enemy_bullet_scene = preload("res://EnemyBullet.tscn")
+var player_bullet_scene = preload("res://Scene/PlayerBullet.tscn")
+var enemy_bullet_scene = preload("res://Scene/EnemyBullet.tscn")
 
 func _ready():
 	instance = self

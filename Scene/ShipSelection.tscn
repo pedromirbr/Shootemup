@@ -1,15 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8kpmk2a3b4c"]
+[gd_scene load_steps=9 format=3 uid="uid://b8kpmk2a3b4c"]
 
-[ext_resource type="Script" path="res://Rotator.gd" id="1_rotator"]
-[ext_resource type="Script" path="res://ShipSelection.gd" id="2_ship_select"]
+[ext_resource type="Script" uid="uid://dlwppqgsl3ol6" path="res://Script/Rotator.gd" id="1_rotator"]
+[ext_resource type="Script" uid="uid://bfu3p8rhmv3v6" path="res://Script/ShipSelection.gd" id="2_ship_select"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_ship"]
-sides = 3
-
-[sub_resource type="BoxShape3D" id="Collision_Ship_Box"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_GreenShip"]
 albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxShape3D" id="Collision_Ship_Box"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_RedShip"]
 albedo_color = Color(1, 0, 0, 1)
@@ -58,7 +57,7 @@ surface_material_override/0 = SubResource("Mat_BlueShip")
 shape = SubResource("Collision_Ship_Box")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 10)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)

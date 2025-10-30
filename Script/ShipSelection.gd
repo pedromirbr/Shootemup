@@ -36,7 +36,7 @@ func _on_confirm_button_pressed():
 	PlayerData.selected_ship = selected_ship_node.name
 
 	print("Player: %s, Ship: %s" % [PlayerData.player_name, PlayerData.selected_ship])
-	get_tree().change_scene_to_file("res://Game.tscn")
+	get_tree().change_scene_to_file("res://Scene/Game.tscn")
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:

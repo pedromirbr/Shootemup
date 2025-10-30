@@ -4,14 +4,17 @@ extends CharacterBody3D
 @export var health = 10
 var max_health: int
 
-var bullet_scene = preload("res://EnemyBullet.tscn")
-var explosion_scene = preload("res://Explosion.tscn")
+var bullet_scene = preload("res://Scene/EnemyBullet.tscn")
+var explosion_scene = preload("res://Scene/Explosion.tscn")
 
 func _ready():
+	position.z = PlayerData.GAME_DEPTH
 	max_health = health
 
 func _physics_process(_delta):
 	velocity = Vector3(0, -1, 0) * speed
+	if position.y <= -7:
+		queue_free()
 	move_and_slide()
 
 

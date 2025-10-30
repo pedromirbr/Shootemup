@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dplk7w1x8y20"]
+[gd_scene load_steps=8 format=3 uid="uid://dplk7w1x8y20"]
 
-[ext_resource type="Script" uid="uid://direuq5lewfka" path="res://Game.gd" id="1_game_script"]
-[ext_resource type="PackedScene" uid="uid://b1b2b3b4b5b6" path="res://Player.tscn" id="2_player_scene"]
-[ext_resource type="PackedScene" uid="uid://d1d2d3d4d5d6" path="res://Enemy.tscn" id="3_enemy_scene"]
-[ext_resource type="Script" uid="uid://c2fmkpjhsgbc2" path="res://BulletPool.gd" id="4_sb48q"]
+[ext_resource type="Script" uid="uid://direuq5lewfka" path="res://Script/Game.gd" id="1_mopgc"]
+[ext_resource type="PackedScene" uid="uid://b1b2b3b4b5b6" path="res://Scene/Player.tscn" id="2_ivtx6"]
+[ext_resource type="PackedScene" uid="uid://d1d2d3d4d5d6" path="res://Scene/Enemy.tscn" id="3_3xgnh"]
+[ext_resource type="Script" uid="uid://c2fmkpjhsgbc2" path="res://Script/BulletPool.gd" id="4_48ymf"]
+[ext_resource type="Script" uid="uid://b5r6ua0sgke8k" path="res://Script/camera_3d.gd" id="4_ivtx6"]
 
 [sub_resource type="Environment" id="Env_Game"]
 background_mode = 1
@@ -13,9 +14,9 @@ background_color = Color(0.1, 0.1, 0.12, 1)
 font_size = 24
 
 [node name="Game" type="Node3D"]
-script = ExtResource("1_game_script")
-player_scene = ExtResource("2_player_scene")
-enemy_scene = ExtResource("3_enemy_scene")
+script = ExtResource("1_mopgc")
+player_scene = ExtResource("2_ivtx6")
+enemy_scene = ExtResource("3_3xgnh")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Env_Game")
@@ -29,9 +30,10 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 50)
 projection = 1
 size = 18.0
+script = ExtResource("4_ivtx6")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -86,7 +88,7 @@ layout_mode = 2
 text = "Restart"
 
 [node name="BulletPool" type="Node" parent="."]
-script = ExtResource("4_sb48q")
+script = ExtResource("4_48ymf")
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="pressed" from="UI/GameOverOverlay/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://f1f2f3f4f5f6"]
 
-[ext_resource type="Script" path="res://Explosion.gd" id="1_explosion_script"]
+[ext_resource type="Script" uid="uid://dsleyylhdw5i8" path="res://Script/Explosion.gd" id="1_explosion_script"]
 
 [sub_resource type="ParticleProcessMaterial" id="PPM_Explosion"]
 emission_shape = 1

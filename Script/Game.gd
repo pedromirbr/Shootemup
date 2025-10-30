@@ -7,12 +7,14 @@ extends Node3D
 @onready var enemy_spawn_timer = $EnemySpawnTimer
 
 func _ready():
-	# Instantiate the player and connect its signal
+	# Se sua UI precisar de ajustes para modo retrato
+	# $UI/ScoreLabel.position = Vector2(20, 20)  # Exemplo
+	
+	# Resto do código...
 	var player = player_scene.instantiate()
+	player.position = Vector3(0, 0, PlayerData.GAME_DEPTH)
 	player.died.connect(_on_player_died)
 	add_child(player)
-
-	# Start the timer to spawn enemies
 	enemy_spawn_timer.start()
 
 
@@ -22,13 +24,11 @@ func _process(_delta):
 
 
 func _on_enemy_spawn_timer_timeout():
-	# Create an enemy instance
 	var enemy = enemy_scene.instantiate()
 
-	# Choose a random spawn position at the top of the screen
-	var spawn_x = randf_range(-8.0, 8.0)
-	var spawn_y = 6.0
-	enemy.position = Vector3(spawn_x, spawn_y, 0)
+	var spawn_x = randf_range(PlayerData.PLAYER_BOUNDS_X.x, PlayerData.PLAYER_BOUNDS_X.y)
+	var spawn_y = PlayerData.ENEMY_SPAWN_Y
+	enemy.position = Vector3(spawn_x, spawn_y, PlayerData.GAME_DEPTH)
 
 	add_child(enemy)
 
