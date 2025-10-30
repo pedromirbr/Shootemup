@@ -3,6 +3,7 @@ extends Node
 var player_name: String = "Player"
 var score: int = 0
 var selected_ship: StringName = &"RedShip"
+
 var camera_size: float = 30.0
 
 const GAME_DEPTH: float = -10.0

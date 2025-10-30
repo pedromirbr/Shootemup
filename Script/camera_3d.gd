@@ -7,7 +7,7 @@ func _ready():
 	# Configurar posição e propriedades
 	position = Vector3(0, 0, 50)
 	size = PlayerData.camera_size
-	fov = 70
+
 	
 	print("Câmera configurada: ", name)
 	print("Posição: ", position)
