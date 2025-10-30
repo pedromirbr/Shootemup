@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dplk7w1x8y20"]
+[gd_scene load_steps=10 format=3 uid="uid://dplk7w1x8y20"]
 
 [ext_resource type="Script" uid="uid://direuq5lewfka" path="res://Script/Game.gd" id="1_mopgc"]
 [ext_resource type="PackedScene" uid="uid://b1b2b3b4b5b6" path="res://Scene/Player.tscn" id="2_ivtx6"]
 [ext_resource type="PackedScene" uid="uid://d1d2d3d4d5d6" path="res://Scene/Enemy.tscn" id="3_3xgnh"]
+[ext_resource type="PackedScene" uid="uid://dwdcftntqdk7o" path="res://Scene/barrier.tscn" id="4_3xgnh"]
 [ext_resource type="Script" uid="uid://c2fmkpjhsgbc2" path="res://Script/BulletPool.gd" id="4_48ymf"]
 [ext_resource type="Script" uid="uid://b5r6ua0sgke8k" path="res://Script/camera_3d.gd" id="4_ivtx6"]
+[ext_resource type="Script" uid="uid://dmgmbph2nl6hx" path="res://Script/rivergenerator.gd" id="7_48ymf"]
 
 [sub_resource type="Environment" id="Env_Game"]
 background_mode = 1
@@ -17,6 +19,7 @@ font_size = 24
 script = ExtResource("1_mopgc")
 player_scene = ExtResource("2_ivtx6")
 enemy_scene = ExtResource("3_3xgnh")
+barrier_scene = ExtResource("4_3xgnh")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Env_Game")
@@ -87,6 +90,10 @@ text = "Restart"
 
 [node name="BulletPool" type="Node" parent="."]
 script = ExtResource("4_48ymf")
+
+[node name="RiverGenerator" type="Node3D" parent="."]
+script = ExtResource("7_48ymf")
+barrier_scene = ExtResource("4_3xgnh")
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="pressed" from="UI/GameOverOverlay/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

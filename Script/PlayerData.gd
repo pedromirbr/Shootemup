@@ -11,6 +11,15 @@ const PLAYER_BOUNDS_X: Vector2 = Vector2(-15, 15)
 const PLAYER_BOUNDS_Y: Vector2 = Vector2(-20, 20)
 const ENEMY_SPAWN_Y: float = 20
 
+# ⭐ NOVAS CONSTANTES PARA O RIO
+const RIVER_WIDTH: float = 20.0
+const RIVER_MARGIN: float = 0.3  # Espaço entre barreira e rio
+const RIVER_LEFT_BOUND: float = -RIVER_WIDTH / 2
+const RIVER_RIGHT_BOUND: float = RIVER_WIDTH / 2
+const RIVER_BARRIER_LEFT_POS: float = RIVER_LEFT_BOUND - RIVER_MARGIN
+const RIVER_BARRIER_RIGHT_POS: float = RIVER_RIGHT_BOUND + RIVER_MARGIN
+const RIVER_SCROLL_SPEED: float = 8.0
+
 var ship_stats = {
 	&"GreenShip": {
 		"health": 100,

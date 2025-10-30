@@ -2,11 +2,15 @@ extends Node3D
 
 @export var player_scene: PackedScene
 @export var enemy_scene: PackedScene
+@export var barrier_scene: PackedScene
 
 @onready var score_label = $UI/ScoreLabel
 @onready var enemy_spawn_timer = $EnemySpawnTimer
+@onready var river_generator = $RiverGenerator
 
 func _ready():
+	if river_generator:
+		river_generator.barrier_scene = barrier_scene
 	# Se sua UI precisar de ajustes para modo retrato
 	# $UI/ScoreLabel.position = Vector2(20, 20)  # Exemplo
 	
@@ -26,8 +30,10 @@ func _process(_delta):
 func _on_enemy_spawn_timer_timeout():
 	var enemy = enemy_scene.instantiate()
 
-	var spawn_x = randf_range(PlayerData.PLAYER_BOUNDS_X.x, PlayerData.PLAYER_BOUNDS_X.y)
-	var spawn_y = PlayerData.ENEMY_SPAWN_Y
+	# ⭐ SPAWN DENTRO DO RIO
+	var river_half_width = 3.0
+	var spawn_x = randf_range(-river_half_width + 0.5, river_half_width - 0.5)  # Dentro do rio
+	var spawn_y = 6.0  # Acima da tela
 	enemy.position = Vector3(spawn_x, spawn_y, PlayerData.GAME_DEPTH)
 
 	add_child(enemy)

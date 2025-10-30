@@ -46,8 +46,6 @@ func _physics_process(delta):
 	position.y = clamp(position.y, PlayerData.PLAYER_BOUNDS_Y.x, PlayerData.PLAYER_BOUNDS_Y.y)
 	position.z = PlayerData.GAME_DEPTH  # Manter profundidade
 
-	print("Posição: ", position)
-
 	if Input.is_action_just_pressed("ui_accept"):
 		shoot()
 
