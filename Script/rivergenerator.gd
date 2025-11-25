@@ -7,7 +7,7 @@ extends Node3D
 
 var current_segment: int = 0
 var barriers: Array = []
-var largura: float =0.0
+var largura: float =20.0
 var probability_of_one: float = 0
 
 func _ready():
@@ -27,12 +27,10 @@ func generate_initial_segments():
 func create_segment(y_position: float):
 	# ⭐ USAR CONSTANTES GLOBAIS para posições
 	
-	if largura/9 > randf():
+	if largura/5 > randf():
 		largura=largura-1
 	else:
 		largura=largura+1	
-	
-	print(largura)
 	
 	var left_barrier = barrier_scene.instantiate()
 	left_barrier.position = Vector3(PlayerData.RIVER_BARRIER_LEFT_POS+largura, y_position, PlayerData.GAME_DEPTH)

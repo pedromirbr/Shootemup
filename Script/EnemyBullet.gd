@@ -3,6 +3,9 @@ extends Area3D
 @export var speed = 16.0
 var damage = 5 # As requested, 5 points of damage
 
+func _ready():
+	add_to_group("enemy_bullets")
+
 func _physics_process(delta):
 	position.z = PlayerData.GAME_DEPTH
 	position.y -= speed * delta

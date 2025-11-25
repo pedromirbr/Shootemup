@@ -11,14 +11,19 @@ extends Node3D
 func _ready():
 	if river_generator:
 		river_generator.barrier_scene = barrier_scene
-	# Se sua UI precisar de ajustes para modo retrato
-	# $UI/ScoreLabel.position = Vector2(20, 20)  # Exemplo
 	
-	# Resto do código...
+	# Adicionar interface da IA
+	var game_interface = preload("res://Script/GameInterface.gd").new()
+	add_child(game_interface)
+	
 	var player = player_scene.instantiate()
 	player.position = Vector3(0, 0, PlayerData.GAME_DEPTH)
 	player.died.connect(_on_player_died)
 	add_child(player)
+	
+	# Adicionar player ao grupo para fácil acesso
+	player.add_to_group("player")
+	
 	enemy_spawn_timer.start()
 
 

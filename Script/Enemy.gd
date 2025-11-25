@@ -11,6 +11,7 @@ var explosion_scene = preload("res://Scene/Explosion.tscn")
 func _ready():
 	position.z = PlayerData.GAME_DEPTH
 	max_health = health
+	add_to_group("enemies") 
 
 func _physics_process(_delta):
 	velocity = Vector3(0, -1, 0) * speed

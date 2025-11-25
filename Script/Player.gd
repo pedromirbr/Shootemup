@@ -18,44 +18,55 @@ func _ready():
 	health = stats["health"]
 	damage = stats["damage"]
 	speed_modifier = stats["speed_modifier"]
+	
+	# Adicionar ao grupo para a IA
+	add_to_group("player")
 
-	# CORREÇÃO: Usar cores básicas por enquanto (depois criamos os materiais)
+	# CORREÇÃO: Usar cores básicas por enquanto
 	var ship_name = PlayerData.selected_ship
 	var material = StandardMaterial3D.new()
 	
 	match ship_name:
-		&"GreenShip":
+		"GreenShip":
 			material.albedo_color = Color.GREEN
-		&"RedShip":
+		"RedShip":
 			material.albedo_color = Color.RED
-		&"BlueShip":
+		"BlueShip":
 			material.albedo_color = Color.BLUE
 	
 	$Pivot/MeshInstance3D.set_surface_override_material(0, material)
 
-
 func _physics_process(delta):
-	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	velocity = Vector3(direction.x, -direction.y, 0) * speed * speed_modifier
-	var target_roll = -direction.x * deg_to_rad(15)
+	# Reset velocity no início de cada frame
+	velocity = Vector3.ZERO
+	
+	# Se não estiver sendo controlado por IA, usar input normal
+	var ai_controlled = get_tree().has_group("ai_controlled")
+	if not ai_controlled:
+		var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		velocity = Vector3(direction.x, -direction.y, 0) * speed * speed_modifier
+	
+	# Aplicar rotação baseada no movimento
+	var target_roll = -velocity.x * deg_to_rad(15)
 	rotation.y = lerp_angle(rotation.y, target_roll, delta * speed)
+	
 	move_and_slide()
 
-	# ATUALIZADO: Clamp para resolução 800x1024 (modo retrato)
+	# Manter dentro dos limites
 	position.x = clamp(position.x, PlayerData.PLAYER_BOUNDS_X.x, PlayerData.PLAYER_BOUNDS_X.y)
 	position.y = clamp(position.y, PlayerData.PLAYER_BOUNDS_Y.x, PlayerData.PLAYER_BOUNDS_Y.y)
-	position.z = PlayerData.GAME_DEPTH  # Manter profundidade
+	position.z = PlayerData.GAME_DEPTH
 
-	if Input.is_action_just_pressed("ui_accept"):
+	# Input normal apenas se não for controlado por IA
+	if not ai_controlled and Input.is_action_just_pressed("ui_accept"):
 		shoot()
 
-
+# O resto do script permanece igual...
 func shoot():
 	var bullet = BulletPool.get_player_bullet()
 	bullet.damage = self.damage
 	bullet.global_transform = self.global_transform
 	bullet.global_position.y += 1.0
-	# Não precisa setar visible = true aqui, já é feito no pool
 
 func take_damage(amount):
 	if is_invulnerable:
